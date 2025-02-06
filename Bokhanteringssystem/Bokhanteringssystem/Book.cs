@@ -12,14 +12,18 @@ namespace Bokhanteringssystem
         public string Title { get; set; }
         public string Author { get; set; }
         public int Year { get; set; }
-        public string Genre { get; set; }
-        public Book(int id, string title, string author, int year, string genre)
+        public Book(int id, string title, string author, int year)
         {
             Id = id;
             Title = title;
             Author = author;
             Year = year;
-            Genre = genre;
+        }
+        public Book(string title, string author, int year)
+        {
+            Title = title;
+            Author = author;
+            Year = year;
         }
         public void Validering()
         {
@@ -31,15 +35,17 @@ namespace Bokhanteringssystem
             {
                 throw new ArgumentException("Author is required");
             }
-            if (Year > 2025)
+            if (Year < 0 || Year > 2025)
             {
-                throw new ArgumentException("Year must be a positive number");
+                throw new ArgumentException("Year must be between 0 and 2025");
             }
+
         }
-        public string ToStrig()
+        public override string ToString()
         {
-            return $"{Id} {Title} {Author} {Year} {Genre}";
+            return $"{Id} {Title} {Author} {Year}";
         }
+
     }
 
 }
